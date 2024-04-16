@@ -2,17 +2,17 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 
 const UserList = () => {
-    const [users,
-        setUsers] = useState([])
+    const [tasks,
+        setTasks] = useState([])
 
     useEffect(() => {
-        const fetchUsers = async() => {
-            const result = await axios.get('http://localhost:5001/api/users');
+        const fetchTasks = async() => {
+            const result = await axios.get('http://localhost:5001/api/tasks');
 
             console.log(result.data)
-            setUsers(result.data)
+            setTasks(result.data)
         }
-        fetchUsers();
+        fetchTasks();
     }, [])
     return (
         <div>
@@ -21,16 +21,17 @@ const UserList = () => {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Gender</th>
+                        <th>description</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => (
-                        <tr key={user.name}>
-                            <td>{user.name}</td>
-                            <td>{user.gender}</td>
+                    {tasks.map(task => (
+                        <tr key={task.name}>    
+                            <td>{task.name}</td>
+                            <td>{task.description}</td>
 
                         </tr>
+                        
                     ))}
                 </tbody>
             </table>
@@ -38,5 +39,14 @@ const UserList = () => {
         </div>
     )
 }
+
+// {users.map(task => (
+//     <tr key={user.name}>    
+//         <td>{user.name}</td>
+//         <td>{user.gender}</td>
+
+//     </tr>
+    
+// ))}
 
 export default UserList
